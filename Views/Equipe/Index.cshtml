@@ -1,0 +1,49 @@
+@model Equipe
+@{
+    ViewData["Title"] = "Equipes";
+}
+@* Formulario *@
+<div class="titulo_pagina">
+    <h1>cadastro de @ViewData["Title"]</h1>
+</div>
+
+<form class="cadastro" method="POST" action='@Url.Action("Cadastrar")' enctype="multipart/form-data">
+
+    <div class="campo">
+        <label>ID (só numero)</label>
+        <input type="text" name="Idequipe" />
+    </div>
+
+    <div class="campo">
+        <label>Nome</label>
+        <input type="text" name="Nome" />
+    </div>
+
+    <div class="campo">
+        <label>Imagem</label>
+        <input type="file" name="Imagem" />
+    </div>
+
+    <button class="gradient btn" type="submit">Cadastrar</button>
+
+</form>
+
+<table>
+    <thead>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Foto</th>
+    </thead>
+    <tbody>
+        @foreach (Equipe equipe in ViewBag.Equipes)
+        {
+            <tr>
+                <td>@equipe.Idequipe</td>
+                <td>@equipe.Nome</td>
+                <td><img src="/img/Equipes/@equipe.Imagem" alt="Imagem da Equipe do @equipe.Imagem" width="50px"></td>
+                <td><a asp-area="" asp-controller="Equipe" asp-action="Excluir" asp-route-id="@equipe.Idequipe">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
